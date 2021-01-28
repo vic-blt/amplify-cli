@@ -248,7 +248,8 @@ function getCognitoConfig(cognitoResources, projectRegion) {
   let federationTarget;
 
   if (cognitoResource.output.HostedUIDomain) {
-    domain = `${cognitoResource.output.HostedUIDomain}.auth.${projectRegion}.amazoncognito.com`;
+    domain =
+      cognitoResource.output.HostedUICustomDomain || `${cognitoResource.output.HostedUIDomain}.auth.${projectRegion}.amazoncognito.com`;
   }
   if (cognitoResource.output.OAuthMetadata) {
     const oAuthMetadata = JSON.parse(cognitoResource.output.OAuthMetadata);
@@ -339,7 +340,8 @@ function getAPIGWConfig(apigwResources, projectRegion, configOutput) {
   };
 
   for (let i = 0; i < apigwResources.length; i += 1) {
-    if (apigwResources[i].output.ApiName && apigwResources[i].output.RootUrl) { // only REST endpoints contains this information
+    if (apigwResources[i].output.ApiName && apigwResources[i].output.RootUrl) {
+      // only REST endpoints contains this information
       apigwConfig.aws_cloud_logic_custom.push({
         name: apigwResources[i].output.ApiName,
         endpoint: apigwResources[i].output.RootUrl,

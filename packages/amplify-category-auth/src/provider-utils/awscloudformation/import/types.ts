@@ -45,6 +45,7 @@ export type MetaOutput = {
   FacebookWebClient?: string;
   GoogleWebClient?: string;
   HostedUIDomain?: string;
+  HostedUICustomDomain?: string;
   OAuthMetadata?: string;
   CreatedSNSRole?: string;
 };
